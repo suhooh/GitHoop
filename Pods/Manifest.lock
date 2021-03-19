@@ -30,7 +30,7 @@ DEPENDENCIES:
   - XCoordinator (~> 1.6)
 
 SPEC REPOS:
-  trunk:
+  https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - Kingfisher
     - Moya
@@ -52,6 +52,6 @@ SPEC CHECKSUMS:
   RxTest: 3ccb66bfbace0bf7df1c43a7c75d046f8ce60372
   XCoordinator: 24c8330fe315431f654493ff7b6edc8548fdccc8
 
-PODFILE CHECKSUM: e620312af5f41d6c2a1a2cb99abb7b259c7f8f26
+PODFILE CHECKSUM: 68e008e7efb0aa655138edf2b3dfbca93a45b52f
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.10.1
