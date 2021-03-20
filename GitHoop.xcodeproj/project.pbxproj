@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		466187C54DF4358A66D50A22 /* Pods_GitHoop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF975AD7F7A036D2DD3CCB9 /* Pods_GitHoop.framework */; };
+		8B21028426067EC3004CC134 /* SearchUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B21028326067EC3004CC134 /* SearchUser.swift */; };
 		8B3842EE23CDFFE6008096DD /* DateFormatter+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3842ED23CDFFE6008096DD /* DateFormatter+String.swift */; };
 		8B49FD8A2605D89C001556A5 /* SearchUsersResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B49FD892605D89C001556A5 /* SearchUsersResponse.swift */; };
 		8B49FD942605E163001556A5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B49FD932605E163001556A5 /* User.swift */; };
@@ -66,6 +67,7 @@
 		4CCCD33F40FCC8E92D8C1D61 /* Pods_GitHoopTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GitHoopTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		56E5261720FECD1E89404B73 /* Pods-GitHoop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitHoop.release.xcconfig"; path = "Target Support Files/Pods-GitHoop/Pods-GitHoop.release.xcconfig"; sourceTree = "<group>"; };
 		6EF975AD7F7A036D2DD3CCB9 /* Pods_GitHoop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GitHoop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B21028326067EC3004CC134 /* SearchUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUser.swift; sourceTree = "<group>"; };
 		8B3842ED23CDFFE6008096DD /* DateFormatter+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+String.swift"; sourceTree = "<group>"; };
 		8B49FD892605D89C001556A5 /* SearchUsersResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUsersResponse.swift; sourceTree = "<group>"; };
 		8B49FD932605E163001556A5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 			children = (
 				8B49FDAA2605E6E2001556A5 /* UserList.swift */,
 				8B49FD932605E163001556A5 /* User.swift */,
+				8B21028326067EC3004CC134 /* SearchUser.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -587,6 +590,7 @@
 				8BEB5EDB23C6579C003BFA14 /* AppDelegate.swift in Sources */,
 				8B49FDF72605F84E001556A5 /* UserViewModelType.swift in Sources */,
 				8B3842EE23CDFFE6008096DD /* DateFormatter+String.swift in Sources */,
+				8B21028426067EC3004CC134 /* SearchUser.swift in Sources */,
 				8B49FDF32605F83F001556A5 /* UserListViewModelType.swift in Sources */,
 				8B864B8723CE307600312125 /* GitHubTarget+response.swift in Sources */,
 				8BEB5F1D23C76A9A003BFA14 /* UserViewController.swift in Sources */,

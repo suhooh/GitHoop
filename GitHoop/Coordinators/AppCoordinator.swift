@@ -44,7 +44,7 @@ final class AppCoordinator: NavigationCoordinator<UserListRoute> {
 
   init() {
     super.init()
-    anyRouter.trigger(.userList(type: .grid))
+    anyRouter.trigger(.userList(type: .list))
   }
 
   override func prepareTransition(for route: UserListRoute) -> NavigationTransition {

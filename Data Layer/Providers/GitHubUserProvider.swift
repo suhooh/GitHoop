@@ -36,11 +36,12 @@ final class GitHubUserProvider: UserProviderType {
     }
   }
 
-  func searchUsers(query: String, page: Int?) -> Single<Result<[User], UserProviderError>> {
+  func searchUsers(query: String, page: Int) -> Single<Result<SearchUser, UserProviderError>> {
     return provider.rx.request(.searchUsers(query, page: page)).map { response in
       do {
-        let searchUserResponse = try self.decoder.decode(SearchUserResponse.self, from: response.data)
-        return .success(searchUserResponse.items.map { $0.asUser })
+        let searchResponse = try self.decoder.decode(SearchUserResponse.self, from: response.data)
+        let searchUser = SearchUser(users: searchResponse.items.map { $0.asUser }, page: page)
+        return .success(searchUser)
       } catch {
         return .failure(.fetchFailure)
       }

@@ -7,13 +7,14 @@ import RxCocoa
 final class UserListViewModel: UserListViewModelType {
 
   struct UserListViewModelInput: UserListViewModelInputType {
-    let requestNextUserList = PublishSubject<Void>()
+    let requestNextPage = PublishSubject<Void>()
+    let searchUsersText = PublishSubject<String>()
     let selectedUser = PublishSubject<String>()
     let viewType = PublishSubject<UserListType>()
   }
   struct UserListViewModelOutput: UserListViewModelOutputType {
     let users = BehaviorRelay<[User]>(value: [])
-    internal let nextIndex = BehaviorRelay<Int?>(value: nil)
+    internal let currentPage = BehaviorRelay<Int>(value: 0)
   }
 
   private let userProvider: UserProviderType
@@ -31,29 +32,63 @@ final class UserListViewModel: UserListViewModelType {
   }
 
   private func bind() {
-    let userList = Observable.zip(input.requestNextUserList, output.nextIndex) { $1 }
-      .flatMap { [unowned self] next in
-        self.userProvider.fetchUsers(since: next)
+    let searchByText = input.searchUsersText
+      .distinctUntilChanged()
+      .filter { !$0.isEmpty }
+      .flatMap { [unowned self] text in
+        self.userProvider.searchUsers(query: text, page: 1)
       }
-      .map { result -> UserList in
-        if case .success(let list) = result {
-          return list
+      .map { result -> SearchUser in
+        if case .success(let searchUser) = result {
+          return searchUser
         } else {
-          return UserList(users: [], since: 0)
+          return SearchUser(users: [], page: 0)
         }
       }
       .share()
 
-    userList
+    searchByText
+      .map { $0.users }
+      .bind(to: output.users)
+      .disposed(by: bag)
+
+    input.searchUsersText
+      .filter { $0.isEmpty }
+      .map { _ in [] }
+      .bind(to: output.users)
+      .disposed(by: bag)
+
+    input.searchUsersText
+      .filter { $0.isEmpty }
+      .map { _ in 0 }
+      .bind(to: output.currentPage)
+      .disposed(by: bag)
+
+    let searchByPage = input.requestNextPage
+      .withLatestFrom(Observable.combineLatest(input.searchUsersText, output.currentPage)) { (text: $1.0, page: $1.1) }
+      .filter { !$0.text.isEmpty }
+      .flatMap { [unowned self] event in
+        self.userProvider.searchUsers(query: event.text, page: event.page + 1)
+      }
+      .map { result -> SearchUser in
+        if case .success(let searched) = result {
+          return searched
+        } else {
+          return SearchUser(users: [], page: 0)
+        }
+      }
+      .share()
+
+    searchByPage
       .map { $0.users }
       .withLatestFrom(output.users) { (fetched: $0, existing: $1) }
       .map { $0.existing + $0.fetched }
       .bind(to: output.users)
       .disposed(by: bag)
 
-    userList
-      .map { $0.since }
-      .bind(to: output.nextIndex)
+    Observable.merge(searchByText, searchByPage)
+      .map { $0.page }
+      .bind(to: output.currentPage)
       .disposed(by: bag)
 
     input.selectedUser

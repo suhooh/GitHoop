@@ -29,7 +29,7 @@ struct UserEntity: Decodable {
   let blog: String?
   let location: String?
   let email: String?
-  let hireable: String?
+  let hireable: Bool?
   let bio: String?
   let publicRepos: Int?
   let publicGists: Int?

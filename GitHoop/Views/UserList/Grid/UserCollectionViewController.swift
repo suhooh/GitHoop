@@ -20,7 +20,7 @@ final class UserCollectionViewController: RxViewController<UserListViewModelType
     setCollectionViewFlowLayout()
   }
 
-  // MARK: - View Model Binding
+  // MARK: - Binding
 
   override func bind() {
     super.bind()
@@ -43,24 +43,17 @@ final class UserCollectionViewController: RxViewController<UserListViewModelType
         return event.items.contains(where: { $0 >= (event.lastIndex) })
       }
       .map { _ in }
-      .bind(to: viewModel.input.requestNextUserList)
+      .bind(to: viewModel.input.requestNextPage)
       .disposed(by: bag)
 
     viewTypeButton.rx.tap
       .map { UserListType.list }
       .bind(to: viewModel.input.viewType)
       .disposed(by: bag)
-
-    // Request the first user list once.
-    viewModel.output.users
-      .filter { $0.isEmpty }
-      .map { _ in }
-      .bind(to: viewModel.input.requestNextUserList)
-      .dispose()
   }
 
 
-  // MARK: - UI setting
+  // MARK: - UI
   
   private func setNavigationBarLogo() {
     let frame = CGRect(x: 0, y: 0, width: 200, height: 20)
