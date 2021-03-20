@@ -1,6 +1,7 @@
 import Foundation
 import XCoordinator
 
+
 enum UserListType {
   case list
   case grid
@@ -13,10 +14,10 @@ enum UserListRoute: Route, Equatable {
 
 final class AppCoordinator: NavigationCoordinator<UserListRoute> {
 
-  private let service = GitHubService()
+  private let githubUserProvider: UserProviderType = GitHubUserProvider()
 
-  private lazy var userListViewModel: UserListViewModel = {
-    UserListViewModel(service: service, router: anyRouter)
+  private lazy var userListViewModel: UserListViewModelType = {
+    UserListViewModel(provider: githubUserProvider, router: anyRouter)
   }()
 
   private lazy var userListViewController: UserListViewController = {
@@ -31,10 +32,13 @@ final class AppCoordinator: NavigationCoordinator<UserListRoute> {
     return view
   }()
 
+  private var userViewModel: UserViewModelType {
+    UserViewModel(provider: githubUserProvider)
+  }
+
   private var userViewController: UserViewController {
-    let viewModel = UserViewModel(service: service)
     let view = UserViewController.initFromStoryboard()
-    view.viewModel = viewModel
+    view.viewModel = userViewModel
     return view
   }
 

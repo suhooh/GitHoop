@@ -4,35 +4,43 @@ import RxSwift
 import RxCocoa
 
 
-final class UserListViewModel: RxViewModel {
+final class UserListViewModel: UserListViewModelType {
 
-  struct Input {
+  struct UserListViewModelInput: UserListViewModelInputType {
     let requestNextUserList = PublishSubject<Void>()
     let selectedUser = PublishSubject<String>()
     let viewType = PublishSubject<UserListType>()
   }
-  struct Output {
+  struct UserListViewModelOutput: UserListViewModelOutputType {
     let users = BehaviorRelay<[User]>(value: [])
-    fileprivate let nextIndex = BehaviorRelay<Int?>(value: nil)
+    internal let nextIndex = BehaviorRelay<Int?>(value: nil)
   }
 
-  let input = Input()
-  let output = Output()
-
-  private let service: GitHubServiceType
+  private let userProvider: UserProviderType
   private let router: AnyRouter<UserListRoute>
   private let bag = DisposeBag()
 
-  init(service: GitHubServiceType = GitHubService(), router: AnyRouter<UserListRoute>) {
-    self.service = service
+  init(provider: UserProviderType, router: AnyRouter<UserListRoute>) {
+    self.userProvider = provider
     self.router = router
+    super.init(
+      input: UserListViewModelInput(),
+      output: UserListViewModelOutput()
+    )
     bind()
   }
 
   private func bind() {
     let userList = Observable.zip(input.requestNextUserList, output.nextIndex) { $1 }
       .flatMap { [unowned self] next in
-        self.service.fetchUsers(since: next)
+        self.userProvider.fetchUsers(since: next)
+      }
+      .map { result -> UserList in
+        if case .success(let list) = result {
+          return list
+        } else {
+          return UserList(users: [], since: 0)
+        }
       }
       .share()
 

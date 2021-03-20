@@ -2,16 +2,13 @@ import UIKit
 import RxSwift
 
 
-protocol UserCollectionView {
-}
-
-final class UserCollectionViewController: RxViewController<UserListViewModel>, UserCollectionView {
+final class UserCollectionViewController: RxViewController<UserListViewModelType> {
 
   @IBOutlet weak var collectionView: UICollectionView!
   private var avatarSize: CGSize!
   private lazy var viewTypeButton: UIButton = {
     let button = UIButton(type: .custom)
-    button.setImage(UIImage(named:"view_list"), for: .normal)
+    button.setImage(UIImage(named: "view_list"), for: .normal)
     return button
   }()
   
@@ -80,7 +77,7 @@ final class UserCollectionViewController: RxViewController<UserListViewModel>, U
   }
 
   private func setCollectionViewFlowLayout() {
-    let itemsInARow: Int = 2
+    let itemsInARow: Int = 3
     let itemSpacing: CGFloat = 26.0 / CGFloat(itemsInARow)
     let itemWidth = (UIScreen.main.bounds.width - (itemSpacing * CGFloat(itemsInARow + 1))) / CGFloat(itemsInARow)
     let itemSize = CGSize(width: itemWidth, height: itemWidth + 33)

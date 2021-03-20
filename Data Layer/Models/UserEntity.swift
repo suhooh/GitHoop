@@ -1,8 +1,8 @@
 import Foundation
 
 
-struct User: Decodable {
-  // Basic info from 'GET /users'
+struct UserEntity: Decodable {
+  // Basic info from 'GET /users', 'Get /search/users'
   let login: String
   let id: Int
   let nodeId: String
@@ -21,6 +21,7 @@ struct User: Decodable {
   let receivedEventsUrl: String
   let type: String
   let siteAdmin: Bool
+  let score: Double?
 
   // Additional info from 'GET /users/:username'
   let name: String?
@@ -36,4 +37,24 @@ struct User: Decodable {
   let following: Int?
   let createdAt: Date?
   let updatedAt: Date?
+}
+
+extension UserEntity {
+  var asUser: User {
+    User(
+      login: login,
+      id: id,
+      avatarUrl: avatarUrl,
+      name: name,
+      company: company,
+      blog: blog,
+      location: location,
+      email: email,
+      bio: bio,
+      publicRepos: publicRepos,
+      followers: followers,
+      following: following,
+      createdAt: createdAt
+    )
+  }
 }

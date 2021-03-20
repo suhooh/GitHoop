@@ -2,15 +2,12 @@ import UIKit
 import RxSwift
 
 
-protocol UserListView {
-}
-
-final class UserListViewController: RxViewController<UserListViewModel>, UserListView {
+final class UserListViewController: RxViewController<UserListViewModelType> {
 
   @IBOutlet weak var tableView: UITableView!
   private lazy var viewTypeButton: UIButton = {
     let button = UIButton(type: .custom)
-    button.setImage(UIImage(named:"view_grid"), for: .normal)
+    button.setImage(UIImage(named: "view_grid"), for: .normal)
     return button
   }()
 

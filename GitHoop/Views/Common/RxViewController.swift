@@ -17,10 +17,10 @@ class RxViewController<T>: UIViewController, RxView {
   }
   private let isBindReady = BehaviorSubject<Bool>(value: false)
   private var binder: Disposable?
-
+  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-
+    
     // Bind once both view and view model are ready.
     guard binder == nil else { return }
     binder = isBindReady
@@ -29,7 +29,7 @@ class RxViewController<T>: UIViewController, RxView {
       .bind(onNext: bind)
     binder?.disposed(by: bag)
   }
-
+  
   internal func bind() {
     binder?.dispose()
   }

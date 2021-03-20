@@ -4,7 +4,7 @@ import RxOptional
 import Kingfisher
 
 
-final class UserViewController: RxViewController<UserViewModel> {
+final class UserViewController: RxViewController<UserViewModelType> {
 
   @IBOutlet weak var avatarImageView: UIImageView!
   @IBOutlet weak var nameLabel: UILabel!

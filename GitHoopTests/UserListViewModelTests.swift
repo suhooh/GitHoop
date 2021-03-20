@@ -7,15 +7,15 @@ import RxTest
 class UserListViewModelTests: XCTestCase {
 
   var viewModel: UserListViewModel!
-  var serviceMock: GitHubServiceMock!
+  var providerMock: GitHubUserProviderMock!
   var coordinatorMock: AppCoordinatorMock!
   var bag: DisposeBag!
   let scheduler = TestScheduler(initialClock: 0)
 
   override func setUp() {
-    serviceMock = GitHubServiceMock()
+    providerMock = GitHubUserProviderMock()
     coordinatorMock = AppCoordinatorMock()
-    viewModel = UserListViewModel(service: serviceMock, router: coordinatorMock.anyRouter)
+    viewModel = UserListViewModel(provider: providerMock, router: coordinatorMock.anyRouter)
     bag = DisposeBag()
   }
 
@@ -42,8 +42,8 @@ class UserListViewModelTests: XCTestCase {
 
     XCTAssertEqual(usersObserver.events, Recorded.events(
       .next(0, []),
-      .next(1, serviceMock.userList.users.map { $0.id }),
-      .next(2, (serviceMock.userList.users + serviceMock.userList.users).map { $0.id })
+      .next(1, providerMock.userResponse.users.map { $0.id }),
+      .next(2, (providerMock.userResponse.users + providerMock.userResponse.users).map { $0.id })
     ))
   }
 

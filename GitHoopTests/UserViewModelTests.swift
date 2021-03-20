@@ -7,13 +7,13 @@ import RxTest
 class UserViewModelTests: XCTestCase {
 
   var viewModel: UserViewModel!
-  var serviceMock: GitHubServiceMock!
+  var providerMock: GitHubUserProviderMock!
   var bag: DisposeBag!
   let scheduler = TestScheduler(initialClock: 0)
 
   override func setUp() {
-    serviceMock = GitHubServiceMock()
-    viewModel = UserViewModel(service: serviceMock)
+    providerMock = GitHubUserProviderMock()
+    viewModel = UserViewModel(provider: providerMock)
     bag = DisposeBag()
   }
 

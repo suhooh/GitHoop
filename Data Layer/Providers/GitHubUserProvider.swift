@@ -3,13 +3,8 @@ import Moya
 import RxSwift
 
 
-protocol GitHubServiceType {
-  func fetchUsers(since: Int?) -> Single<UserList>
-  func fetchUser(_ username: String) -> Single<User?>
-}
-
-final class GitHubService {
-  static var decoder: JSONDecoder = {
+final class GitHubUserProvider: UserProviderType {
+  private lazy var decoder: JSONDecoder = {
     let decoder = JSONDecoder()
     decoder.keyDecodingStrategy = .convertFromSnakeCase
     decoder.dateDecodingStrategy = .formatted(.iso8601Full)
@@ -17,27 +12,37 @@ final class GitHubService {
   }()
 
   let provider = MoyaProvider<GitHubTarget>()
-}
 
-extension GitHubService: GitHubServiceType {
-  func fetchUsers(since: Int?) -> Single<UserList> {
+  func fetchUsers(since: Int?) -> Single<Result<UserList, UserProviderError>> {
     return provider.rx.request(.users(since)).map { [unowned self] response in
       do {
-        let users = try GitHubService.decoder.decode([User].self, from: response.data)
+        let users = try self.decoder.decode([UserEntity].self, from: response.data)
         let since = self.extractSinceValue(response: response.response)
-        return UserList(users: users, since: since)
+        return .success(UserList(users: users.map { $0.asUser }, since: since))
       } catch {
-        return UserList(users: [], since: nil)
+        return .failure(.fetchFailure)
       }
     }
   }
 
-  func fetchUser(_ username: String) -> Single<User?> {
+  func fetchUser(_ username: String) -> Single<Result<User?, UserProviderError>> {
     return provider.rx.request(.user(username)).map { response in
       do {
-        return try GitHubService.decoder.decode(User.self, from: response.data)
+        let userEntity = try self.decoder.decode(UserEntity.self, from: response.data)
+        return .success(userEntity.asUser)
       } catch {
-        return nil
+        return .failure(.fetchFailure)
+      }
+    }
+  }
+
+  func searchUsers(query: String, page: Int?) -> Single<Result<[User], UserProviderError>> {
+    return provider.rx.request(.searchUsers(query, page: page)).map { response in
+      do {
+        let searchUserResponse = try self.decoder.decode(SearchUserResponse.self, from: response.data)
+        return .success(searchUserResponse.items.map { $0.asUser })
+      } catch {
+        return .failure(.fetchFailure)
       }
     }
   }
@@ -46,8 +51,8 @@ extension GitHubService: GitHubServiceType {
     guard
       let nextUrlString = response?.linksFromHeader["next"],
       let since = nextUrlString.getQueryString(parameter: "since")
-      else {
-        return nil
+    else {
+      return nil
     }
     return Int(since)
   }
