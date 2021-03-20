@@ -35,7 +35,7 @@ class UserListViewModelTests: XCTestCase {
         .next(1, ()),
         .next(2, ())
       ])
-      .bind(to: viewModel.input.requestNextUserList)
+      .bind(to: viewModel.input.requestNextPage)
       .disposed(by: bag)
 
     scheduler.start()

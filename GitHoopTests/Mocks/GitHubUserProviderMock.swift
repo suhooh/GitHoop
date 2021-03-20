@@ -21,11 +21,12 @@ class GitHubUserProviderMock: UserProviderType {
     return try! decoder.decode(UserEntity.self, from: GitHubTarget.user(username).sampleData)
   }
 
-  var searchedUsers: [User] {
+  var searchedUsers: SearchUser {
     let usersResponse = try! decoder.decode(SearchUserResponse.self, from: GitHubTarget.searchUsers("", page: nil).sampleData)
-    return usersResponse.items.map { $0.asUser }
+    return SearchUser(users: usersResponse.items.map { $0.asUser }, page: 0)
   }
 
+  // MARK: - UserProviderType
   func fetchUsers(since: Int?) -> Single<Result<UserList, UserProviderError>> {
     return Single<Result<UserList, UserProviderError>>.create { single in
       let userList = UserList(users: self.userResponse.users.map { $0.asUser },
@@ -42,8 +43,8 @@ class GitHubUserProviderMock: UserProviderType {
     }
   }
 
-  func searchUsers(query: String, page: Int?) -> Single<Result<[User], UserProviderError>> {
-    return Single<Result<[User], UserProviderError>>.create { single in
+  func searchUsers(query: String, page: Int) -> Single<Result<SearchUser, UserProviderError>> {
+    return Single<Result<SearchUser, UserProviderError>>.create { single in
       single(.success(.success(self.searchedUsers)))
       return Disposables.create()
     }
