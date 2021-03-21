@@ -1,12 +1,16 @@
 PODS:
   - Alamofire (4.9.1)
   - Kingfisher (4.10.1)
+  - MarqueeLabel (4.0.5)
   - Moya/Core (13.0.1):
     - Alamofire (~> 4.1)
     - Result (~> 4.1)
   - Moya/RxSwift (13.0.1):
     - Moya/Core
     - RxSwift (~> 4.0)
+  - NotificationBannerSwift (3.0.6):
+    - MarqueeLabel (~> 4.0.5)
+    - SnapKit (~> 5.0.1)
   - Result (4.1.0)
   - RxCocoa (4.5.0):
     - RxSwift (>= 4.4.2, ~> 4.4)
@@ -16,6 +20,7 @@ PODS:
   - RxSwift (4.5.0)
   - RxTest (4.5.0):
     - RxSwift (>= 4.4.2, ~> 4.4)
+  - SnapKit (5.0.1)
   - XCoordinator (1.6.0):
     - XCoordinator/Core (= 1.6.0)
   - XCoordinator/Core (1.6.0)
@@ -23,6 +28,7 @@ PODS:
 DEPENDENCIES:
   - Kingfisher (~> 4.10)
   - Moya/RxSwift (~> 13.0)
+  - NotificationBannerSwift (~> 3.0.0)
   - RxCocoa (~> 4.5)
   - RxOptional (~> 3.6)
   - RxSwift (~> 4.5)
@@ -30,28 +36,34 @@ DEPENDENCIES:
   - XCoordinator (~> 1.6)
 
 SPEC REPOS:
-  trunk:
+  https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - Kingfisher
+    - MarqueeLabel
     - Moya
+    - NotificationBannerSwift
     - Result
     - RxCocoa
     - RxOptional
     - RxSwift
     - RxTest
+    - SnapKit
     - XCoordinator
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
+  MarqueeLabel: 00cc0bcd087111dca575878b3531af980559707d
   Moya: f4a4b80ff2f8a4ffc208dfb31cd91636622fee6e
+  NotificationBannerSwift: 7021be2338f8f29cf424b0aca43da462bf9e2a1a
   Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
   RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
   RxOptional: 80426a0ddbd092573e4c482d8cc13302078c4d5e
   RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
   RxTest: 3ccb66bfbace0bf7df1c43a7c75d046f8ce60372
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   XCoordinator: 24c8330fe315431f654493ff7b6edc8548fdccc8
 
-PODFILE CHECKSUM: e620312af5f41d6c2a1a2cb99abb7b259c7f8f26
+PODFILE CHECKSUM: 1c6337d55828a4bf558eed950880534a15c73b26
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.10.1

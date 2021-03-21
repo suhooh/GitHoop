@@ -1,5 +1,7 @@
 import Foundation
 import XCoordinator
+import Moya
+
 
 enum UserListType {
   case list
@@ -13,10 +15,14 @@ enum UserListRoute: Route, Equatable {
 
 final class AppCoordinator: NavigationCoordinator<UserListRoute> {
 
-  private let service = GitHubService()
+  private lazy var githubUserProvider: UserProviderType = {
+    let endpoint: EndpointType = MoyaProvider<GitHubTarget>()
+    let decoder: DecoderType = GitHubDecoder(dateFormatter: DateFormatter.iso8601Full)
+    return GitHubUserProvider(endpoint: endpoint, decoder: decoder)
+  }()
 
-  private lazy var userListViewModel: UserListViewModel = {
-    UserListViewModel(service: service, router: anyRouter)
+  private lazy var userListViewModel: UserListViewModelType = {
+    UserListViewModel(provider: githubUserProvider, router: anyRouter)
   }()
 
   private lazy var userListViewController: UserListViewController = {
@@ -31,16 +37,19 @@ final class AppCoordinator: NavigationCoordinator<UserListRoute> {
     return view
   }()
 
+  private var userViewModel: UserViewModelType {
+    UserViewModel(provider: githubUserProvider)
+  }
+
   private var userViewController: UserViewController {
-    let viewModel = UserViewModel(service: service)
     let view = UserViewController.initFromStoryboard()
-    view.viewModel = viewModel
+    view.viewModel = userViewModel
     return view
   }
 
   init() {
     super.init()
-    anyRouter.trigger(.userList(type: .grid))
+    anyRouter.trigger(.userList(type: .list))
   }
 
   override func prepareTransition(for route: UserListRoute) -> NavigationTransition {
