@@ -1,5 +1,6 @@
 import Foundation
 import XCoordinator
+import Moya
 
 
 enum UserListType {
@@ -14,7 +15,11 @@ enum UserListRoute: Route, Equatable {
 
 final class AppCoordinator: NavigationCoordinator<UserListRoute> {
 
-  private let githubUserProvider: UserProviderType = GitHubUserProvider()
+  private lazy var githubUserProvider: UserProviderType = {
+    let endpoint: EndpointType = MoyaProvider<GitHubTarget>()
+    let decoder: DecoderType = GitHubDecoder(dateFormatter: DateFormatter.iso8601Full)
+    return GitHubUserProvider(endpoint: endpoint, decoder: decoder)
+  }()
 
   private lazy var userListViewModel: UserListViewModelType = {
     UserListViewModel(provider: githubUserProvider, router: anyRouter)

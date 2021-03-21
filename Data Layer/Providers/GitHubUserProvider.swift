@@ -1,26 +1,25 @@
 import Foundation
-import Moya
 import RxSwift
 
 
 final class GitHubUserProvider: UserProviderType {
-  private lazy var decoder: JSONDecoder = {
-    let decoder = JSONDecoder()
-    decoder.keyDecodingStrategy = .convertFromSnakeCase
-    decoder.dateDecodingStrategy = .formatted(.iso8601Full)
-    return decoder
-  }()
 
-  let gitHubEndopint = MoyaProvider<GitHubTarget>()
+  private let endpoint: EndpointType
+  private let decoder: DecoderType
   private lazy var networkNotReachableError: UserProviderError = {
     .fetchFailure("Internet Connection not Available.")
   }()
+
+  init(endpoint: EndpointType, decoder: DecoderType) {
+    self.endpoint = endpoint
+    self.decoder = decoder
+  }
 
   // MARK: - UserProviderType
 
   func searchUsers(query: String, page: Int) -> Single<Result<UserList, UserProviderError>> {
     return Reachability.isConnectedToNetwork ?
-      gitHubEndopint.rx.request(.searchUsers(query, page: page)).map { response in
+      endpoint.rx.request(.searchUsers(query, page: page)).map { response in
       switch response.statusCode {
       case 200:
         do {
@@ -31,14 +30,14 @@ final class GitHubUserProvider: UserProviderType {
           return .failure(self.generateDecodeError(error))
         }
       default:
-        return .failure(self.generateFetchError(response: response))
+        return .failure(self.generateFetchError(data: response.data))
       }
     } : .just(.failure(networkNotReachableError))
   }
 
   func fetchUser(_ username: String) -> Single<Result<User?, UserProviderError>> {
     return Reachability.isConnectedToNetwork ?
-      gitHubEndopint.rx.request(.user(username)).map { response in
+      endpoint.rx.request(.user(username)).map { response in
       switch response.statusCode {
       case 200:
         do {
@@ -48,7 +47,7 @@ final class GitHubUserProvider: UserProviderType {
           return .failure(self.generateDecodeError(error))
         }
       default:
-        return .failure(self.generateFetchError(response: response))
+        return .failure(self.generateFetchError(data: response.data))
       }
     } : .just(.failure(networkNotReachableError))
   }
@@ -71,9 +70,9 @@ final class GitHubUserProvider: UserProviderType {
     }
   }
 
-  private func generateFetchError(response: Response) -> UserProviderError {
+  private func generateFetchError(data: Data) -> UserProviderError {
     do {
-      let error = try decoder.decode(ErrorResponse.self, from: response.data)
+      let error = try decoder.decode(ErrorResponse.self, from: data)
       return .fetchFailure(error.message)
     } catch {
       return .fetchFailure(error.localizedDescription)

@@ -5,13 +5,7 @@ import RxSwift
 
 class GitHubUserProviderMock: UserProviderType {
 
-  private lazy var decoder: JSONDecoder = {
-    let decoder = JSONDecoder()
-    decoder.keyDecodingStrategy = .convertFromSnakeCase
-    decoder.dateDecodingStrategy = .formatted(.iso8601Full)
-    return decoder
-  }()
-
+  private lazy var decoder: DecoderType = GitHubDecoder(dateFormatter: DateFormatter.iso8601Full)
   var page: Int = 1
 
   // MARK: - sample responses
