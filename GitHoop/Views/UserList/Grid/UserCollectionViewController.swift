@@ -1,5 +1,6 @@
 import UIKit
 import RxSwift
+import NotificationBannerSwift
 
 
 final class UserCollectionViewController: RxViewController<UserListViewModelType> {
@@ -49,6 +50,10 @@ final class UserCollectionViewController: RxViewController<UserListViewModelType
     viewTypeButton.rx.tap
       .map { UserListType.list }
       .bind(to: viewModel.input.viewType)
+      .disposed(by: bag)
+
+    viewModel.output.alertMessage
+      .bind { GrowingNotificationBanner(title: "Error", subtitle: $0, style: .danger).show() }
       .disposed(by: bag)
   }
 

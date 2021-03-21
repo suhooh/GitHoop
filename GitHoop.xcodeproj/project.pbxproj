@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		466187C54DF4358A66D50A22 /* Pods_GitHoop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF975AD7F7A036D2DD3CCB9 /* Pods_GitHoop.framework */; };
-		8B21028426067EC3004CC134 /* SearchUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B21028326067EC3004CC134 /* SearchUser.swift */; };
+		8B1B5E572607736E0021878B /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1B5E562607736E0021878B /* ErrorResponse.swift */; };
+		8B1B5E5C2607845B0021878B /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1B5E5B2607845B0021878B /* Reachability.swift */; };
+		8B21028426067EC3004CC134 /* UserList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B21028326067EC3004CC134 /* UserList.swift */; };
 		8B3842EE23CDFFE6008096DD /* DateFormatter+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3842ED23CDFFE6008096DD /* DateFormatter+String.swift */; };
 		8B49FD8A2605D89C001556A5 /* SearchUsersResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B49FD892605D89C001556A5 /* SearchUsersResponse.swift */; };
 		8B49FD942605E163001556A5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B49FD932605E163001556A5 /* User.swift */; };
 		8B49FD9D2605E234001556A5 /* UserProviderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B49FD9C2605E234001556A5 /* UserProviderType.swift */; };
-		8B49FDAB2605E6E2001556A5 /* UserList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B49FDAA2605E6E2001556A5 /* UserList.swift */; };
 		8B49FDC22605E83F001556A5 /* GitHubTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEB5F1123C75B50003BFA14 /* GitHubTarget.swift */; };
 		8B49FDF32605F83F001556A5 /* UserListViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B49FDF22605F83F001556A5 /* UserListViewModelType.swift */; };
 		8B49FDF72605F84E001556A5 /* UserViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B49FDF62605F84E001556A5 /* UserViewModelType.swift */; };
@@ -29,7 +30,6 @@
 		8BC8D7C223C7BA6500D20D75 /* UserListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC8D7C123C7BA6500D20D75 /* UserListCell.swift */; };
 		8BC8D7C423C89D9800D20D75 /* UITableViewCell+Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC8D7C323C89D9800D20D75 /* UITableViewCell+Identifier.swift */; };
 		8BC8D7C623C8B8FA00D20D75 /* RxViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC8D7C523C8B8FA00D20D75 /* RxViewCell.swift */; };
-		8BC8D7C823CBB20D00D20D75 /* UsersResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC8D7C723CBB20D00D20D75 /* UsersResponse.swift */; };
 		8BC8D7CA23CBCA5D00D20D75 /* String+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC8D7C923CBCA5D00D20D75 /* String+URL.swift */; };
 		8BC8D7CC23CBDBDA00D20D75 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC8D7CB23CBDBDA00D20D75 /* AppCoordinator.swift */; };
 		8BEB5EDB23C6579C003BFA14 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEB5EDA23C6579C003BFA14 /* AppDelegate.swift */; };
@@ -67,12 +67,13 @@
 		4CCCD33F40FCC8E92D8C1D61 /* Pods_GitHoopTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GitHoopTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		56E5261720FECD1E89404B73 /* Pods-GitHoop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitHoop.release.xcconfig"; path = "Target Support Files/Pods-GitHoop/Pods-GitHoop.release.xcconfig"; sourceTree = "<group>"; };
 		6EF975AD7F7A036D2DD3CCB9 /* Pods_GitHoop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GitHoop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B21028326067EC3004CC134 /* SearchUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUser.swift; sourceTree = "<group>"; };
+		8B1B5E562607736E0021878B /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
+		8B1B5E5B2607845B0021878B /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		8B21028326067EC3004CC134 /* UserList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserList.swift; sourceTree = "<group>"; };
 		8B3842ED23CDFFE6008096DD /* DateFormatter+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+String.swift"; sourceTree = "<group>"; };
 		8B49FD892605D89C001556A5 /* SearchUsersResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUsersResponse.swift; sourceTree = "<group>"; };
 		8B49FD932605E163001556A5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8B49FD9C2605E234001556A5 /* UserProviderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProviderType.swift; sourceTree = "<group>"; };
-		8B49FDAA2605E6E2001556A5 /* UserList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserList.swift; sourceTree = "<group>"; };
 		8B49FDF22605F83F001556A5 /* UserListViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewModelType.swift; sourceTree = "<group>"; };
 		8B49FDF62605F84E001556A5 /* UserViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModelType.swift; sourceTree = "<group>"; };
 		8B49FE0526060B91001556A5 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
@@ -87,7 +88,6 @@
 		8BC8D7C123C7BA6500D20D75 /* UserListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListCell.swift; sourceTree = "<group>"; };
 		8BC8D7C323C89D9800D20D75 /* UITableViewCell+Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Identifier.swift"; sourceTree = "<group>"; };
 		8BC8D7C523C8B8FA00D20D75 /* RxViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxViewCell.swift; sourceTree = "<group>"; };
-		8BC8D7C723CBB20D00D20D75 /* UsersResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersResponse.swift; sourceTree = "<group>"; };
 		8BC8D7C923CBCA5D00D20D75 /* String+URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+URL.swift"; sourceTree = "<group>"; };
 		8BC8D7CB23CBDBDA00D20D75 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		8BEB5ED723C6579C003BFA14 /* GitHoop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHoop.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -154,6 +154,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		8B1B5E5A2607844B0021878B /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				8B1B5E5B2607845B0021878B /* Reachability.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		8B4180D423CBF1CA008379A8 /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,6 +173,7 @@
 		8B49FD8F2605E0BF001556A5 /* Data Layer */ = {
 			isa = PBXGroup;
 			children = (
+				8B1B5E5A2607844B0021878B /* Utils */,
 				8BEB5F0C23C75572003BFA14 /* Providers */,
 				8BEB5F0B23C74A15003BFA14 /* Models */,
 				8B49FDB02605E740001556A5 /* Endpoint */,
@@ -194,9 +203,8 @@
 		8B49FD922605E14B001556A5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				8B49FDAA2605E6E2001556A5 /* UserList.swift */,
+				8B21028326067EC3004CC134 /* UserList.swift */,
 				8B49FD932605E163001556A5 /* User.swift */,
-				8B21028326067EC3004CC134 /* SearchUser.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -326,9 +334,9 @@
 		8BEB5F0B23C74A15003BFA14 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				8BC8D7C723CBB20D00D20D75 /* UsersResponse.swift */,
-				8BEB5F0F23C75618003BFA14 /* UserEntity.swift */,
 				8B49FD892605D89C001556A5 /* SearchUsersResponse.swift */,
+				8BEB5F0F23C75618003BFA14 /* UserEntity.swift */,
+				8B1B5E562607736E0021878B /* ErrorResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -571,18 +579,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B49FD942605E163001556A5 /* User.swift in Sources */,
-				8BC8D7C823CBB20D00D20D75 /* UsersResponse.swift in Sources */,
 				8B49FD9D2605E234001556A5 /* UserProviderType.swift in Sources */,
 				8BC8D7C623C8B8FA00D20D75 /* RxViewCell.swift in Sources */,
 				8BEB5F2D23C77881003BFA14 /* RxViewController.swift in Sources */,
 				8BEB5F1F23C76AAD003BFA14 /* UserViewModel.swift in Sources */,
 				8B864B9023CE61F400312125 /* UserCollectionViewController.swift in Sources */,
+				8B1B5E572607736E0021878B /* ErrorResponse.swift in Sources */,
 				8BEB5F1023C75618003BFA14 /* UserEntity.swift in Sources */,
 				8B49FE0626060B91001556A5 /* ViewModelType.swift in Sources */,
 				8BEB5F1923C76A81003BFA14 /* UserListViewController.swift in Sources */,
 				8BC8D7C423C89D9800D20D75 /* UITableViewCell+Identifier.swift in Sources */,
 				8BC8D7CA23CBCA5D00D20D75 /* String+URL.swift in Sources */,
-				8B49FDAB2605E6E2001556A5 /* UserList.swift in Sources */,
 				8BEB5F2123C76BEF003BFA14 /* DateFormatter+ios8601.swift in Sources */,
 				8B864B9223CE620F00312125 /* UserCollectionCell.swift in Sources */,
 				8BC8D7C223C7BA6500D20D75 /* UserListCell.swift in Sources */,
@@ -590,7 +597,7 @@
 				8BEB5EDB23C6579C003BFA14 /* AppDelegate.swift in Sources */,
 				8B49FDF72605F84E001556A5 /* UserViewModelType.swift in Sources */,
 				8B3842EE23CDFFE6008096DD /* DateFormatter+String.swift in Sources */,
-				8B21028426067EC3004CC134 /* SearchUser.swift in Sources */,
+				8B21028426067EC3004CC134 /* UserList.swift in Sources */,
 				8B49FDF32605F83F001556A5 /* UserListViewModelType.swift in Sources */,
 				8B864B8723CE307600312125 /* GitHubTarget+response.swift in Sources */,
 				8BEB5F1D23C76A9A003BFA14 /* UserViewController.swift in Sources */,
@@ -598,6 +605,7 @@
 				8BC8D7CC23CBDBDA00D20D75 /* AppCoordinator.swift in Sources */,
 				8BEB5F1523C766A9003BFA14 /* String+utf8.swift in Sources */,
 				8BEB5F2923C774B4003BFA14 /* UIViewController+StoryboardInstantiable.swift in Sources */,
+				8B1B5E5C2607845B0021878B /* Reachability.swift in Sources */,
 				8BEB5F1723C768AA003BFA14 /* GitHubUserProvider.swift in Sources */,
 				8B49FD8A2605D89C001556A5 /* SearchUsersResponse.swift in Sources */,
 				8B49FDC22605E83F001556A5 /* GitHubTarget.swift in Sources */,
@@ -687,7 +695,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -741,7 +749,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -798,7 +806,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XZQ827NZWJ;
 				INFOPLIST_FILE = GitHoopTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -821,7 +829,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XZQ827NZWJ;
 				INFOPLIST_FILE = GitHoopTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -4,14 +4,15 @@ import RxCocoa
 
 
 protocol UserListViewModelInputType {
-  var requestNextPage: PublishSubject<Void> { get }
   var searchUsersText: PublishSubject<String> { get }
+  var requestNextPage: PublishSubject<Void> { get }
   var selectedUser: PublishSubject<String> { get }
   var viewType: PublishSubject<UserListType> { get }
 }
 
 protocol UserListViewModelOutputType {
   var users: BehaviorRelay<[User]> { get }
+  var alertMessage: PublishSubject<String> { get }
   var currentPage: BehaviorRelay<Int> { get }
 }
 

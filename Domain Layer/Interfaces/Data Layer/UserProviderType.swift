@@ -3,12 +3,12 @@ import RxSwift
 
 
 protocol UserProviderType {
-  func fetchUsers(since: Int?) -> Single<Result<UserList, UserProviderError>>
+  func searchUsers(query: String, page: Int) -> Single<Result<UserList, UserProviderError>>
   func fetchUser(_ username: String) -> Single<Result<User?, UserProviderError>>
-  func searchUsers(query: String, page: Int) -> Single<Result<SearchUser, UserProviderError>>
 }
 
 enum UserProviderError: Error {
-  case fetchFailure
-  case unknown
+  case fetchFailure(String)
+  case decodeFailure(String)
+  case unknown(String)
 }

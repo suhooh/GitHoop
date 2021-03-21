@@ -9,7 +9,8 @@ final class UserViewModel: UserViewModelType {
     let username = PublishSubject<String>()
   }
   struct UserViewModelOutput: UserViewModelOutputType {
-    let user = BehaviorRelay<User?>(value: nil)
+    let user = PublishSubject<User>()
+    let alertMessage = PublishSubject<String>()
   }
 
   private let userProvider: UserProviderType
@@ -25,10 +26,13 @@ final class UserViewModel: UserViewModelType {
   }
 
   private func bind() {
-    input.username
+    let fetchUserResult = input.username
       .flatMap { [unowned self] username in
         self.userProvider.fetchUser(username)
       }
+      .share()
+
+    fetchUserResult
       .map { result -> User? in
         if case .success(let user) = result {
           return user
@@ -36,7 +40,26 @@ final class UserViewModel: UserViewModelType {
           return nil
         }
       }
+      .filterNil()
       .bind(to: output.user)
+      .disposed(by: bag)
+
+    fetchUserResult
+      .flatMap { result -> Observable<String?> in
+        let errorMessage: String? = {
+          if case .failure(let error) = result {
+            switch error {
+            case .fetchFailure(let msg): return msg
+            case .decodeFailure(let msg): return msg
+            case .unknown(let msg): return msg
+            }
+          }
+          return nil
+        }()
+        return .just(errorMessage)
+      }
+      .filterNil()
+      .bind(to: output.alertMessage)
       .disposed(by: bag)
   }
 }

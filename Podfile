@@ -1,6 +1,6 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
-platform :ios, '9.0'
+platform :ios, '14.1'
 
 target 'GitHoop' do
   use_frameworks!
@@ -11,6 +11,7 @@ target 'GitHoop' do
   pod 'XCoordinator',         '~> 1.6'
   pod 'RxOptional',           '~> 3.6'
   pod 'Kingfisher',           '~> 4.10'
+  pod 'NotificationBannerSwift', '~> 3.0.0'
 
   target 'GitHoopTests' do
     inherit! :search_paths

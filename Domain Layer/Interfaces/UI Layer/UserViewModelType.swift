@@ -8,7 +8,8 @@ protocol UserViewModelInputType {
 }
 
 protocol UserViewModelOutputType {
-  var user: BehaviorRelay<User?> { get }
+  var user: PublishSubject<User> { get }
+  var alertMessage: PublishSubject<String> { get }
 }
 
 typealias UserViewModelType = ViewModel<UserViewModelInputType, UserViewModelOutputType>

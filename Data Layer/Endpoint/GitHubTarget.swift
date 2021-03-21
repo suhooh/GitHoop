@@ -3,9 +3,8 @@ import Moya
 
 
 enum GitHubTarget {
-  case users(_ since: Int?)
-  case user(_ username: String)
   case searchUsers(_ users: String, page: Int?)
+  case user(_ username: String)
 }
 
 extension GitHubTarget: TargetType {
@@ -13,35 +12,25 @@ extension GitHubTarget: TargetType {
   
   var path: String {
     switch self {
-    case .users:
-      return "/users"
-    case .user(let username):
-      return "/users/\(username)"
     case .searchUsers:
       return "/search/users"
+    case .user(let username):
+      return "/users/\(username)"
     }
   }
   
-  var method: Moya.Method {
-    switch self {
-    case .users, .user, .searchUsers:
-      return .get
-    }
-  }
+  var method: Moya.Method { .get }
   
   var task: Task {
     switch self {
-    case .users(let since):
-      guard let since = since else { return .requestPlain }
-      return .requestParameters(parameters: ["since": String(since)], encoding: URLEncoding.queryString)
-    case .user:
-      return .requestPlain
     case .searchUsers(let users, let page):
       let params = [
         "q": String(users),
         "page": String(page ?? 1)
       ]
       return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
+    case .user:
+      return .requestPlain
     }
   }
   
@@ -51,12 +40,12 @@ extension GitHubTarget: TargetType {
   
   var sampleData: Data {
     switch self {
-    case .users:
-      return SampleResponse.users.utf8Encoded
-    case .user(let username):
-      return SampleResponse.user(username: username).utf8Encoded
     case .searchUsers:
       return SampleResponse.searchUsers.utf8Encoded
+    case .user(let username):
+      return username != SampleResponse.invalidUsername
+        ? SampleResponse.user(username: username).utf8Encoded
+        : SampleResponse.userNotFound.utf8Encoded
     }
   }
 }

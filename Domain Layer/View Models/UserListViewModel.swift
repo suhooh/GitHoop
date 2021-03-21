@@ -7,13 +7,14 @@ import RxCocoa
 final class UserListViewModel: UserListViewModelType {
 
   struct UserListViewModelInput: UserListViewModelInputType {
-    let requestNextPage = PublishSubject<Void>()
     let searchUsersText = PublishSubject<String>()
+    let requestNextPage = PublishSubject<Void>()
     let selectedUser = PublishSubject<String>()
     let viewType = PublishSubject<UserListType>()
   }
   struct UserListViewModelOutput: UserListViewModelOutputType {
     let users = BehaviorRelay<[User]>(value: [])
+    let alertMessage = PublishSubject<String>()
     internal let currentPage = BehaviorRelay<Int>(value: 0)
   }
 
@@ -32,22 +33,26 @@ final class UserListViewModel: UserListViewModelType {
   }
 
   private func bind() {
-    let searchByText = input.searchUsersText
+    let searchByTextResult = input.searchUsersText
       .distinctUntilChanged()
       .filter { !$0.isEmpty }
       .flatMap { [unowned self] text in
         self.userProvider.searchUsers(query: text, page: 1)
       }
-      .map { result -> SearchUser in
-        if case .success(let searchUser) = result {
+      .share()
+
+    let searchUserByText = searchByTextResult
+      .map { result -> UserList in
+        switch result {
+        case .success(let searchUser):
           return searchUser
-        } else {
-          return SearchUser(users: [], page: 0)
+        case .failure:
+          return UserList(users: [], page: 0)
         }
       }
       .share()
 
-    searchByText
+    searchUserByText
       .map { $0.users }
       .bind(to: output.users)
       .disposed(by: bag)
@@ -64,31 +69,53 @@ final class UserListViewModel: UserListViewModelType {
       .bind(to: output.currentPage)
       .disposed(by: bag)
 
-    let searchByPage = input.requestNextPage
+    let searchByPageResult = input.requestNextPage
       .withLatestFrom(Observable.combineLatest(input.searchUsersText, output.currentPage)) { (text: $1.0, page: $1.1) }
       .filter { !$0.text.isEmpty }
       .flatMap { [unowned self] event in
         self.userProvider.searchUsers(query: event.text, page: event.page + 1)
       }
-      .map { result -> SearchUser in
+      .share()
+
+    let searchUserByPage = searchByPageResult
+      .map { result -> UserList in
         if case .success(let searched) = result {
           return searched
         } else {
-          return SearchUser(users: [], page: 0)
+          return UserList(users: [], page: 0)
         }
       }
       .share()
 
-    searchByPage
+    searchUserByPage
       .map { $0.users }
       .withLatestFrom(output.users) { (fetched: $0, existing: $1) }
       .map { $0.existing + $0.fetched }
       .bind(to: output.users)
       .disposed(by: bag)
 
-    Observable.merge(searchByText, searchByPage)
+    Observable.merge(searchUserByText, searchUserByPage)
       .map { $0.page }
       .bind(to: output.currentPage)
+      .disposed(by: bag)
+
+
+    Observable.merge(searchByTextResult, searchByPageResult)
+      .flatMap { result -> Observable<String?> in
+        let errorMessage: String? = {
+          if case .failure(let error) = result {
+            switch error {
+            case .fetchFailure(let msg): return msg
+            case .decodeFailure(let msg): return msg
+            case .unknown(let msg): return msg
+            }
+          }
+          return nil
+        }()
+        return .just(errorMessage)
+      }
+      .filterNil()
+      .bind(to: output.alertMessage)
       .disposed(by: bag)
 
     input.selectedUser
@@ -103,4 +130,13 @@ final class UserListViewModel: UserListViewModelType {
       }
       .disposed(by: bag)
   }
+}
+
+extension Result {
+    var isSuccess: Bool {
+      if case .success = self { return true } else { return false }
+    }
+    var isError: Bool {
+      return !isSuccess
+    }
 }
