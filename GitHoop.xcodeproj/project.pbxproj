@@ -19,6 +19,7 @@
 		8B49FDF32605F83F001556A5 /* UserListViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B49FDF22605F83F001556A5 /* UserListViewModelType.swift */; };
 		8B49FDF72605F84E001556A5 /* UserViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B49FDF62605F84E001556A5 /* UserViewModelType.swift */; };
 		8B49FE0626060B91001556A5 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B49FE0526060B91001556A5 /* ViewModelType.swift */; };
+		8B73EEF22678BCDD006AC381 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 8B73EEF12678BCDD006AC381 /* README.md */; };
 		8B8541132607A195005B48CB /* GitHubDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8541122607A195005B48CB /* GitHubDecoder.swift */; };
 		8B8541172607A4D7005B48CB /* EndpointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8541162607A4D7005B48CB /* EndpointType.swift */; };
 		8B864B8723CE307600312125 /* GitHubTarget+response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B864B8623CE307600312125 /* GitHubTarget+response.swift */; };
@@ -79,6 +80,7 @@
 		8B49FDF22605F83F001556A5 /* UserListViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewModelType.swift; sourceTree = "<group>"; };
 		8B49FDF62605F84E001556A5 /* UserViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModelType.swift; sourceTree = "<group>"; };
 		8B49FE0526060B91001556A5 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
+		8B73EEF12678BCDD006AC381 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		8B8541122607A195005B48CB /* GitHubDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubDecoder.swift; sourceTree = "<group>"; };
 		8B8541162607A4D7005B48CB /* EndpointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointType.swift; sourceTree = "<group>"; };
 		8B864B8623CE307600312125 /* GitHubTarget+response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GitHubTarget+response.swift"; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 		8BEB5ECE23C6579B003BFA14 = {
 			isa = PBXGroup;
 			children = (
+				8B73EEF12678BCDD006AC381 /* README.md */,
 				8B49FD8F2605E0BF001556A5 /* Data Layer */,
 				8B49FD902605E0F5001556A5 /* Domain Layer */,
 				8BEB5ED923C6579C003BFA14 /* GitHoop */,
@@ -481,6 +484,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B73EEF22678BCDD006AC381 /* README.md in Resources */,
 				8BEB5F2523C7739E003BFA14 /* UserViewController.storyboard in Resources */,
 				8BEB5F2323C7737F003BFA14 /* UserListViewController.storyboard in Resources */,
 				8BEB5EE723C6579D003BFA14 /* LaunchScreen.storyboard in Resources */,
